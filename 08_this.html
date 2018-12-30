@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    function Person() {
+        alert(this);
+    }
+    Person(); //this指向window
+
+    function Student() {
+
+    }
+    Student.a = Person;
+    Student.a(); //this指向student
+
+    var json = {
+        a: Person
+    }
+    json.a(); //this指向json
+
+    //改变指向
+    Person.call(json);
+    Person.apply(Student);
+</script>
+
+</html>

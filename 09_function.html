@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>匿名函数</title>
+</head>
+
+<body>
+
+
+    <script>
+        (function (window) {
+            function Person() {
+                return {
+                    setName: setName,
+                    getName: getName
+                }
+            }
+
+            function setName(name) {
+                this.name = name;
+            }
+
+            function getName() {
+                return this.name;
+            }
+
+            function aaa() {
+
+            }
+            window.Person = Person;
+        })(window);
+
+        var Person = window.Person();
+        Person.setName('nihao');
+        alert(Person.getName());
+    </script>
+</body>
+
+</html>
