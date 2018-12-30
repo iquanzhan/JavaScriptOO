@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>table插件</title>
+    <script src="https://cdn.bootcss.com/jquery/3.2.0/jquery.js"></script>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <th field='name'>姓名</th>
+            <th field='descript'>描述</th>
+            <th field='del'>删除</th>
+            <th field='update'>修改</th>
+        </tr>
+    </table>
+</body>
+<script>
+    (function ($) {
+        $.fn.GridPanel = {
+            defaultConfig: {
+                table_id: '',
+                url: '',
+                option:{
+                    
+                },
+                data: '',
+                fileds: $("#" + $.fn.GridPanel.defaultConfig.table_id + " *[filed]")
+            },
+            /** 对表格的操作都放到表格中*/
+            method: {
+                createTable: function (config) {
+                    //客户端传递过来的参数覆盖掉默认的。
+                    $.extend($.fn.GridPanel.defaultConfig, config);
+
+                    $.post($.fn.GridPanel.defaultConfig.url, null, function (data) {
+                        var array = eval('(' + data + ')');
+
+                        var $tbody = $("#" + $.fn.GridPanel.defaultConfig.table_id + " tbody");
+                        $.each(array, function () {
+                            $tbody.append($.fn.GridPanel.method.createTR.call(this));
+                        })
+                    });
+
+                },
+                addRow: function () {
+
+                },
+                deleteRow: function () {
+
+                },
+                createTR: function () {
+                    var jsonObj = $(this);
+
+                    var $tr = "<tr/>";
+                    $.each($.fn.GridPanel.defaultConfig.fileds, function () {
+                        $tr.append($.fn.GridPanel.method.createTD.call(this, jsonObj));
+                    })
+                },
+                createTD: function (jsonObj) {
+                    return $("<td/>").text(jsonObj[$(this).attr('field')]);
+                }
+            }
+        };
+    })($)
+</script>
+
+</html>

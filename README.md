@@ -29,3 +29,30 @@ apply：采用参数数组的形式
 
 
 
+使用delegate可以为当前和未来的元素添加事件。
+
+```js
+$("div").delegate("button","click",function(){
+  $("p").slideToggle();
+});
+```
+
+
+
+
+
+```js
+$.extend(true,default,config);//true表示深度迭代
+```
+
+
+
+### Jquery向元素中添加cache数据
+
+```
+$('div').data(key,value);//存储
+
+$('div').data(key);//取值
+```
+
+Jquery清空元素：$('div').empty();
