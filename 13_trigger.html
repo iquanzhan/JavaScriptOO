@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/jquery/3.2.0/jquery.js"></script>
+</head>
+
+<body>
+    调用click的同时，调用其他方法
+    <button>你好</button>
+</body>
+<script>
+    $().ready(function () {
+        $('button').unbind('click');
+        $('button').bind('click', function () {
+            $(this).trigger('做全栈攻城狮', [1, 5]);
+        })
+
+        $('button').unbind('做全栈攻城狮');
+        $('button').bind('做全栈攻城狮', function (event, a, b) {
+            alert(a + b);
+        })
+    });
+</script>
+
+</html>

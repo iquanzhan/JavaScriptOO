@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/jquery/3.2.0/jquery.js"></script>
+</head>
+
+<body>
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>4</div>
+    <div>5</div>
+</body>
+<script>
+    (function ($) {
+        $.fn.myEach = function (callback) {
+            var array = $(this);
+            for (var i = 0; i < array.length; i++) {
+                callback.call($(array[i]), $(array[i]));
+            }
+        }
+
+        $.myEach = function (obj, callback) {
+            var array = obj;
+            for (var i = 0; i < array.length; i++) {
+                callback.call($(array[i]), $(array[i]));
+            }
+        }
+    })($);
+
+    $().ready(function () {
+        $('div').myEach(function (item) {
+            alert(this.text());
+        });
+        $.myEach($("div"), function (item) {
+            alert(this.text());
+        });
+    });
+</script>
+
+</html>
