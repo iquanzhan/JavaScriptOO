@@ -4,13 +4,15 @@ com.chengxiaoxiao.extends = function (json, prop) {
     function F() {
     }
 
+    /** 第一次调用 */
     /* 如果传过来的是对象，则把对象赋值给原型 */
-    if (typeof json == 'object') {
+    if (typeof json == 'object') {//json对象
         for (var i in json) {
             F.prototype[i] = json[i];
         }
     }
 
+    /** 第二次调用 */
     if (typeof json == 'function') {
         F.prototype = json.prototype;
         for (var i in prop) {

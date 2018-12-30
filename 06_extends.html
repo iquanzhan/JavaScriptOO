@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>继承的再次升级</title>
+    <script src="./scripts/nameplace.js"></script>
+</head>
+
+<body>
+    <p>
+        函数名称为extend，有两个参数：source 、 destination
+        1.如果是两者都是json，完成从source到destination的复制
+        2.如果destination是一个函数，source是一个json对象。把source的key value赋值给destination的prototype
+        3.如果两者都是函数，把source的prototype复制给destination
+    </p>
+
+
+</body>
+<script>
+    nameplace('com.chengxiaoxiao');
+    com.chengxiaoxiao.extends = function (destination, source) {
+        if (typeof destination == 'object' && typeof source == 'object') {
+            for (var i in source) {
+                destination[i] = source[i];
+            }
+        }
+
+        if (typeof destination == "function") {
+            if (typeof source == 'object') {
+                for (var i in source) {
+                    destination.prototype[i] = source[i];
+                }
+            }
+            if (typeof source == 'function') {
+                destination.prototype = source.prototype;
+            }
+        }
+        return destination;
+    }
+    var json = com.chengxiaoxiao.extends({}, {
+        aa: '11',
+        bb: '22'
+    })
+
+    function Student() {
+
+    }
+    Student.id = 23;
+
+    function Person() {
+
+    }
+    Person.id1 = 1;
+
+    var fun = com.chengxiaoxiao.extends(Student, Person);
+    debugger;
+    alert(fun.id);
+
+    alert(json.aa)
+</script>
+
+</html>
