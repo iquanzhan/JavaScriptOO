@@ -25,8 +25,8 @@
             defaultConfig: {
                 table_id: '',
                 url: '',
-                option:{
-                    
+                option: {
+
                 },
                 data: '',
                 fileds: $("#" + $.fn.GridPanel.defaultConfig.table_id + " *[filed]")
@@ -67,6 +67,40 @@
             }
         };
     })($)
+
+
+    $().ready(function () {
+        /**
+         * 1、创建命名空间
+         */
+        $.nameSapce("com.itheima12.Person");
+        /**
+         * 2、把GridPanel中的内容复制给了com.itheima12.Person
+         */
+        $.extend(com.itheima12.Person, $.fn.GridPanel);
+        /**
+         * 3、调用方法
+         */
+        com.itheima12.Person.method.createTable({
+            table_id: 'usertable',
+            url: '../PersonServlet',
+            fields: $("#usertable *[field]"),
+            option: {
+                query: {
+                    method: 'query'
+                },
+                del: {
+                    method: 'deleteById',
+                    pid: ''
+                },
+                update: {
+                    method: "update"
+                }
+            },
+            filedUpdate: 'update',
+            filedDelete: 'del'
+        });
+    });
 </script>
 
 </html>
